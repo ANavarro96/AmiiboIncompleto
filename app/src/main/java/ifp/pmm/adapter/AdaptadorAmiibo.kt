@@ -1,82 +1,53 @@
-package ifp.pmm.adapter;
+package ifp.pmm.adapter
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import androidx.recyclerview.widget.RecyclerView
+import ifp.pmm.adapter.AdaptadorAmiibo.AmiiboViewHolder
+import android.view.ViewGroup
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.ImageView
+import ifp.pmm.amiiborecyclerview.R
+import android.widget.TextView
+import java.util.ArrayList
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+class AdaptadorAmiibo(listaAmiibos: ArrayList<Amiibo>) : RecyclerView.Adapter<AmiiboViewHolder>() {
+    private var listaAmiibos: ArrayList<Amiibo>
 
-import java.util.ArrayList;
-
-import ifp.pmm.amiiborecyclerview.R;
-
-public class AdaptadorAmiibo extends RecyclerView.Adapter<AdaptadorAmiibo.AmiiboViewHolder> {
-    private ArrayList<Amiibo> listaAmiibos;
-
-
-    public AdaptadorAmiibo(ArrayList<Amiibo> listaAmiibos) {
-        this.listaAmiibos = listaAmiibos;
+    init {
+        this.listaAmiibos = listaAmiibos
     }
 
-    public ArrayList<Amiibo> getListaAmiibos() {
-        return listaAmiibos;
-    }
-    public void setListaAmiibos(ArrayList<Amiibo> ListaAmiibos) {
-        this.listaAmiibos = ListaAmiibos;
+    fun getListaAmiibos(): ArrayList<Amiibo> {
+        return listaAmiibos
     }
 
-
-
-    @NonNull
-    @Override
-    public AmiiboViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_amiibo, parent, false);
-        return new AmiiboViewHolder(item);
+    fun setListaAmiibos(ListaAmiibos: ArrayList<Amiibo>) {
+        listaAmiibos = ListaAmiibos
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull AmiiboViewHolder holder, int position) {
-        Amiibo AmiiboActual = listaAmiibos.get(position);
-      /* TODO: Asociar los elementos de nuestra clase al ViewHolder, usar
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AmiiboViewHolder {
+        val item =
+            LayoutInflater.from(parent.context).inflate(R.layout.layout_amiibo, parent, false)
+        return AmiiboViewHolder(item)
+    }
+
+    override fun onBindViewHolder(holder: AmiiboViewHolder, position: Int) {
+        val AmiiboActual: Amiibo = listaAmiibos[position]
+        /* TODO: Asociar los elementos de nuestra clase al ViewHolder, usar
       *   Picasso para poder mostrar la imagen */
-
     }
 
-
-    @Override
-    public int getItemCount() {
-        return listaAmiibos.size();
+    override fun getItemCount(): Int {
+        return listaAmiibos.size
     }
 
-    public class AmiiboViewHolder extends RecyclerView.ViewHolder {
-        TextView nombreCuadroTexto;
-        ImageView fotoAmiibo;
+    inner class AmiiboViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var nombreCuadroTexto: TextView
+        var fotoAmiibo: ImageView
 
-        public TextView getNombreCuadroTexto() {
-            return nombreCuadroTexto;
-        }
-
-        public void setNombreCuadroTexto(TextView nombreCuadroTexto) {
-            this.nombreCuadroTexto = nombreCuadroTexto;
-        }
-
-
-        public ImageView getFotoAmiibo() {
-            return fotoAmiibo;
-        }
-
-        public void setFotoAmiibo(ImageView portadaIW) {
-            this.fotoAmiibo = portadaIW;
-        }
-
-
-        public AmiiboViewHolder(@NonNull View itemView) {
-            super(itemView);
-            this.nombreCuadroTexto = itemView.findViewById(R.id.nombre);
-            this.fotoAmiibo = itemView.findViewById(R.id.fotoAmiibo);
+        init {
+            nombreCuadroTexto = itemView.findViewById(R.id.nombre)
+            fotoAmiibo = itemView.findViewById(R.id.fotoAmiibo)
         }
     }
 }
