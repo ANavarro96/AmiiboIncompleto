@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var rw: RecyclerView
 
     /* TODO: Crear nuestro modelo
-    *   Usar un ejemplo de respuesta y la web https://www.jsonschema2pojo.org/ */
+    *   Usar un ejemplo de respuesta y la web https://json2kt.com/ */
     var listaAmiibos: ArrayList<Amiibo> = ArrayList<Amiibo>()
     lateinit var retrofit: Retrofit
     lateinit var adaptadorAmiibo: AdaptadorAmiibo
